@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: mern_backend
+    container_name: mern_cards_backend
     restart: unless-stopped
     ports:
       - "5000:5000"
@@ -24,13 +24,13 @@ services:
 
   mongodb:
     image: docker.io/mongo:7.0
-    container_name: mern_mongodb
+    container_name: mern_cards_mongodb
     restart: unless-stopped
     # Reachable only from this machine (for tools like MongoDB Compass).
     # Without 127.0.0.1, Docker would publish the database to the whole
     # internet on a server, bypassing the firewall.
     ports:
-      - "127.0.0.1:27017:27017"
+      - "127.0.0.1:27018:27017"
     environment:
       - MONGO_INITDB_DATABASE=CardsDB
     volumes:
@@ -45,3 +45,4 @@ services:
 
 volumes:
   mongo_data:
+    name: mern_cards_mongo_data
